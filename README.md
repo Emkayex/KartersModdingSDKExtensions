@@ -1,5 +1,5 @@
 # Karters Modding SDK Extensions
-This repository will contain an collection of scripts and other tools to extend the official modding SDK for The Karters 2: Turbo Charged.
+This repository will contain an collection of scripts and other tools to extend the official modding SDK for [The Karters 2: Turbo Charged](https://github.com/PixelEdgeGames/TheKarters_WorkshopProjectRelease).
 
 Any Unity editor extensions can copied to your modding tools directory, or you can keep this repository elsewhere and then symlink it from your modding tools directory. I recommend symlinking the tools so you can just use `git fetch` and `git pull` to update any of the tools to the latest version.
 
