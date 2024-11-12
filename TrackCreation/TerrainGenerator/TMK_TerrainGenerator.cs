@@ -10,8 +10,6 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class TMK_TerrainGenerator : MonoBehaviour
 {
-    public Terrain TerrainParent;
-
     public bool RaycastFromAbove = true;
     public float PathHeightMultiplier = 0.99f;
 
@@ -21,9 +19,14 @@ public class TMK_TerrainGenerator : MonoBehaviour
     [HideInInspector]
     private float[,] RefHeights;
 
+    [HideInInspector]
+    private Terrain TerrainParent;
+
     #if UNITY_EDITOR
     public void GenerateTerrain()
     {
+        TerrainParent = gameObject.GetComponent<Terrain>();
+
         // Assume the heightmap is a square and get the height array from the existing terrain data
         var terrainData = TerrainParent.terrainData;
         var heightmapDimension = terrainData.heightmapResolution;
