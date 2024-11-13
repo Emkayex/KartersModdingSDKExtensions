@@ -32,6 +32,7 @@ public class TMK_TerrainGenerator : MonoBehaviour
         var heightmapDimension = terrainData.heightmapResolution;
         var heights = terrainData.GetHeights(0, 0, heightmapDimension, heightmapDimension);
         RefHeights = heights;
+        Undo.RecordObject(terrainData, "Automatically generated terrain");
 
         // Get the global position of the terrain by walking up the hierarchy and adding each parent's position value
         var globalPosition = transform.position;
