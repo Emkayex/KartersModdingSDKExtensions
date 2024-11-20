@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(TMK_TerrainGenerator))]
 public class TMK_TerrainGeneratorEditor : Editor
 {
@@ -18,3 +19,4 @@ public class TMK_TerrainGeneratorEditor : Editor
         base.OnInspectorGUI();
     }
 }
+#endif
