@@ -9,6 +9,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class TMK_RoadPainter : MonoBehaviour
 {
+    public List<int> RoadTextureIndexes = new List<int> { 1 };
     public float TextureThreshold = 0.5f;
     public float MaxDistanceFromRoadToPreservePoints = 1f;
 
@@ -57,14 +58,18 @@ public class TMK_RoadPainter : MonoBehaviour
         {
             for (var y = 0; y < yRange; y++)
             {
-                if (splatmapData[x, y, 1] > TextureThreshold)
+                foreach (var roadTextureIndex in RoadTextureIndexes)
                 {
-                    var roadPt = new Vector3(
-                        terrainPosX + ((float)x / xRange * terrainSizeX),
-                        terrainData.GetInterpolatedHeight((float)x / xRange, (float)y / yRange),
-                        terrainPosZ + ((float)y / yRange * terrainSizeZ)
-                    );
-                    RoadPoints.Add(roadPt);
+                    if (splatmapData[x, y, roadTextureIndex] > TextureThreshold)
+                    {
+                        var roadPt = new Vector3(
+                            terrainPosX + ((float)x / xRange * terrainSizeX),
+                            terrainData.GetInterpolatedHeight((float)x / xRange, (float)y / yRange),
+                            terrainPosZ + ((float)y / yRange * terrainSizeZ)
+                        );
+                        RoadPoints.Add(roadPt);
+                        break;
+                    }
                 }
             }
         }
