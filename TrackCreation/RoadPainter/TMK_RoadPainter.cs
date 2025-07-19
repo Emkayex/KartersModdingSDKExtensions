@@ -114,24 +114,6 @@ public class TMK_RoadPainter : MonoBehaviour
         terrainData.SetHoles(0, 0, holeMap);
     }
 
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.red;
-    //     var radius = 0.3f;
-
-    //     for (var i = 0; i < RoadPoints.Count; i++)
-    //     {
-    //         Gizmos.DrawSphere(RoadPoints[i], radius);
-
-    //         if (i < RoadPoints.Count - 1)
-    //         {
-    //             Gizmos.color = Color.yellow;
-    //             Gizmos.DrawLine(RoadPoints[i], RoadPoints[i + 1]);
-    //             Gizmos.color = Color.red;
-    //         }
-    //     }
-    // }
-
     private Terrain CloneTerrain(Terrain terrain)
     {
         // Create a new Terrain and copy the original size, resolution, heightmap, etc.
