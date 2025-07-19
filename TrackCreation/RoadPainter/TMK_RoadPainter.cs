@@ -9,6 +9,9 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class TMK_RoadPainter : MonoBehaviour
 {
+    public float TextureThreshold = 0.5f;
+    public float MaxDistanceFromRoadToPreservePoints = 1f;
+
     [HideInInspector]
     private readonly List<Vector3> RoadPoints = new List<Vector3>();
 
@@ -54,7 +57,7 @@ public class TMK_RoadPainter : MonoBehaviour
         {
             for (var y = 0; y < yRange; y++)
             {
-                if (splatmapData[x, y, 1] > 0.5f)
+                if (splatmapData[x, y, 1] > TextureThreshold)
                 {
                     var roadPt = new Vector3(
                         terrainPosX + ((float)x / xRange * terrainSizeX),
@@ -76,7 +79,6 @@ public class TMK_RoadPainter : MonoBehaviour
         // Those points will be preserved, but all other points will be holes
         var holeRes = newTerrain.terrainData.holesResolution;
         var holeMap = new bool[holeRes, holeRes];
-        var holeRadius = 1.0f;
         var roadPtsNoHeight = RoadPoints.Select(pt => new Vector2(pt.x, pt.z)).ToArray(); // Use Vector2 objects and ignore the height
         Enumerable.Range(0, holeRes).AsParallel().ForAll(x =>
         {
@@ -90,7 +92,7 @@ public class TMK_RoadPainter : MonoBehaviour
                 holeMap[x, y] = false;
                 foreach (var roadPt in roadPtsNoHeight)
                 {
-                    if (Vector2.Distance(holePt, roadPt) < holeRadius)
+                    if (Vector2.Distance(holePt, roadPt) < MaxDistanceFromRoadToPreservePoints)
                     {
                         holeMap[x, y] = true;
                         break;
