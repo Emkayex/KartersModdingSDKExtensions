@@ -23,6 +23,7 @@ public class TMK_RoadPainter : MonoBehaviour
     public void ResetHoleMap()
     {
         // Create a hole map and erase all the holes on the parent terrain
+        TerrainParent = gameObject.GetComponent<Terrain>();
         var holeRes = TerrainParent.terrainData.holesResolution;
         var holeMap = new bool[holeRes, holeRes];
         for (var x = 0; x < holeRes; x++)
