@@ -6,7 +6,7 @@ The following instructions give a very basic idea of how to use the tool, and it
 ## Instructions
 1. Add a `Terrain` object to your Unity scene under the `Environment` object.
 1. In the terrain settings, adjust your width, length, height, etc.
-    1. The default length and width of a terrain is 1000x1000. Four default terrains in a square seems to provide a decent size to work with, but it's easier to use the scripts with one terrain set to a size of 4000x4000.
+    1. The default length and width of a terrain is 1000x1000. Four default terrains in a square seems to provide a decent size to work with, but it's easier to use the scripts with one terrain set to a size of 2000x2000.
 1. Apply a base texture with the `Paint Texture` tool to serve as the default offroad texture.
     1. Either add an existing `Terrain Layer` or create a new one.
 1. Raise and lower the terrain until you're satisfied with the result.
