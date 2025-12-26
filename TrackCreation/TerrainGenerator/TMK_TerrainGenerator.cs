@@ -34,17 +34,8 @@ public class TMK_TerrainGenerator : MonoBehaviour
         RefHeights = heights;
         Undo.RecordObject(terrainData, "Automatically generated terrain");
 
-        // Get the global position of the terrain by walking up the hierarchy and adding each parent's position value
-        var globalPosition = transform.position;
-        var parent = transform.parent;
-        while (parent != null)
-        {
-            globalPosition += parent.position;
-            parent = parent.parent;
-        }
-
         // Step 1: Set the terrain heights to snap to the track
-        SetTerrainToPathHeightWithRaycasts(globalPosition, terrainData, heights);
+        SetTerrainToPathHeightWithRaycasts(TerrainParent.transform.position, terrainData, heights);
         RefHeights = Clone2DArray(heights);
 
         // Step 2: Apply margins around the path
@@ -64,9 +55,6 @@ public class TMK_TerrainGenerator : MonoBehaviour
     {
         // Get the two corners of the terrain which will allow values within the heights array to be converted to (X, Z) coordinates
         var maxTerrainHeight = terrainData.size.y;
-        var bounds = terrainData.bounds;
-        var globalMinCorner = globalPosition + bounds.min;
-        var globalMaxCorner = globalPosition + bounds.max;
 
         // Temporarily disable the terrain's collider to ensure raycasts don't collide with the terrain
         var collider = GetComponent<TerrainCollider>();
@@ -80,8 +68,8 @@ public class TMK_TerrainGenerator : MonoBehaviour
         {
             for (var z = 0; z < zLength; z++)
             {
-                var xRaycastPt = ((globalMaxCorner.x - globalMinCorner.x) * (x * 1.0f / xLength)) + globalPosition.x;
-                var zRaycastPt = ((globalMaxCorner.z - globalMinCorner.z) * (z * 1.0f / zLength)) + globalPosition.z;
+                var xRaycastPt = (terrainData.size.x * (x * 1.0f / xLength)) + globalPosition.x;
+                var zRaycastPt = (terrainData.size.z * (z * 1.0f / zLength)) + globalPosition.z;
 
                 // Set the raycast point Y-value and vector differently depending on whether the raycast should occur from above or below
                 // Some colliders may only be 1-sided, so raycasting from below might not work which is why the option to raycast from above is provided
